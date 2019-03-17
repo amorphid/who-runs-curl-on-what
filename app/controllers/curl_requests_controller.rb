@@ -54,7 +54,7 @@ class CurlRequestsController < ApplicationController
           grep(/^curl/).
           pop
 
-    raise INVALID_PARAMS_MESSAGE if curl_dash_v.match?("<script>")
+    raise INVALID_PARAMS_MESSAGE if curl_dash_v.downcase.match?("<script>")
 
     architecture, operating_system = 
       curl_dash_v.
