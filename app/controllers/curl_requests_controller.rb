@@ -54,7 +54,7 @@ class CurlRequestsController < ApplicationController
           grep(/^curl/).
           pop
 
-    raise INVALID_PARAMS_MESSAGE if curl_dash_v.downcase.match?("<script>")
+    raise INVALID_PARAMS_MESSAGE if curl_dash_v.downcase.match?("<")
 
     architecture, operating_system = 
       curl_dash_v.
@@ -62,6 +62,8 @@ class CurlRequestsController < ApplicationController
         at(2).
         slice(1..-2).
         split("-", 2)
+
+    architecture, operating_system = [nil, architecture] unless operating_system
 
     params[:architecture] = architecture
     params[:dump] = curl_dash_v
