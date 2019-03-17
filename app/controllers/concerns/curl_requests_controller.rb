@@ -1,7 +1,7 @@
 class CurlRequestsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  before_action :validate_user_agent
+  before_action :validate_user_agent, only: :create
 
   def create
     @curl_request = CurlRequest.find_or_initialize_by(curl_request_params)
