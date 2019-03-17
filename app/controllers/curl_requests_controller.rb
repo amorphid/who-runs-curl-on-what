@@ -11,6 +11,11 @@ class CurlRequestsController < ApplicationController
     @curl_request = CurlRequest.find_or_initialize_by(curl_request_params)
     @curl_request.increment_count
     @curl_request.save
+
+    @curl_dash_v = CurlDashV.find_or_initialize_by(curl_dash_v_params)
+    @curl_dash_v.increment_count
+    @curl_dash_v.save
+
     render plain: root_url
   end
 
@@ -19,9 +24,17 @@ class CurlRequestsController < ApplicationController
       CurlRequest.
         all.
         order(:architecture, :operating_system)
+
+    @curl_dash_vs = CurlDashV.all.order(:dump)
   end
 
   private
+
+  def curl_dash_v_params
+    {
+      dump: params[:dump]
+    }
+  end
 
   def curl_request_params
     {
@@ -32,25 +45,29 @@ class CurlRequestsController < ApplicationController
 
   def validate_params 
     raise INVALID_PARAMS_MESSAGE if params[:architecture]
+    raise INVALID_PARAMS_MESSAGE if params[:curl_dash_v]
     raise INVALID_PARAMS_MESSAGE if params[:operating_system]
 
-    architecture, operating_system = 
+    curl_dash_v = 
       params.
-        keys.
-        grep(/^curl/).
-        pop.
+          keys.
+          grep(/^curl/).
+          pop
+
+    raise INVALID_PARAMS_MESSAGE if curl_dash_v.match?("<script>")
+
+    architecture, operating_system = 
+      curl_dash_v.
         split(" ").
         at(2).
         slice(1..-2).
         split("-", 2)
 
-    raise INVALID_PARAMS_MESSAGE if architecture.match?("<script>")
-    raise INVALID_PARAMS_MESSAGE if operating_system.match?("<script>")
-
     params[:architecture] = architecture
+    params[:dump] = curl_dash_v
     params[:operating_system] = operating_system
     
-    params.permit(:architecture, :operating_system)
+    params.permit(:architecture, :curl_dash_v, :operating_system)
   rescue
     render plain: INVALID_PARAMS_MESSAGE, status_code: 400
   end

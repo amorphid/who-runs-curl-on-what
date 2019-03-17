@@ -33,6 +33,29 @@
   </tbody>
 </table>
 
+<h2>What is everyone's raw "curl -V" dump?</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dump</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @curl_dash_vs.each do |curl_dash_v| %>
+      <tr>
+        <td>
+          <%= curl_dash_v.dump %>
+        </td>
+        <td>
+          <%= curl_dash_v.count %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <h2>Contribute</h2>
 
 <a href="https://github.com/amorphid/who-runs-curl-on-what">

@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_232541) do
+ActiveRecord::Schema.define(version: 2019_03_17_120924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "curl_dash_vs", force: :cascade do |t|
+    t.string "dump"
+    t.integer "count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "curl_requests", force: :cascade do |t|
     t.string "architecture"
