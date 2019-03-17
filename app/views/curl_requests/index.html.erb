@@ -1,0 +1,40 @@
+<h1>Who Runs Curl On What?</h1>
+
+<h2>What do you run Curl on?</h2>
+
+<code>
+  curl -V | curl -d @- 'https://who-runs-curl-on-what.herokuapp.com/'
+</code>
+
+<h2>What does everyone run Curl on?</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Architecture</th>
+      <th>Operating System</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @curl_requests.each do |curl_request| %>
+      <tr>
+        <td>
+          <%= curl_request.architecture %>
+        </td>
+        <td>
+          <%= curl_request.operating_system %>
+        </td>
+        <td>
+          <%= curl_request.count %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Contribute</h2>
+
+<a href="https://github.com/amorphid/who-runs-curl-on-what">
+  https://github.com/amorphid/who-runs-curl-on-what
+</a>

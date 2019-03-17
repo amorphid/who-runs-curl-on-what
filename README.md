@@ -1,24 +1,17 @@
-# README
+# Who Runs Curl On What
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+What do you run Curl on?:
 
-Things you may want to cover:
+    curl -V | curl -d @- 'https://who-runs-curl-on-what.herokuapp.com/'
 
-* Ruby version
+[What does everyone run Curl on?](https://who-runs-curl-on-what.herokuapp.com/)
 
-* System dependencies
+# Built with
 
-* Configuration
+- Ruby on Rails 5.2.2.1
+- Ruby 2.6.1
+- PostgreSQL 11.2
 
-* Database creation
+# License
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
