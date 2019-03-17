@@ -40,8 +40,13 @@ class CurlRequestsController < ApplicationController
         at(2).
         slice(1..-2).
         split("-", 2)
+
+    raise INVALID_PARAMS_MESSAGE if architecture.match?("<script>")
+    raise INVALID_PARAMS_MESSAGE if operating_system.match?("<script>")
+
     params[:architecture] = architecture
     params[:operating_system] = operating_system
+    
     params.permit(:architecture, :operating_system)
   rescue
     render plain: INVALID_PARAMS_MESSAGE, status_code: 400
