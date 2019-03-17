@@ -20,7 +20,7 @@
     <% @curl_requests.each do |curl_request| %>
       <tr>
         <td>
-          <%= curl_request.architecture %>
+          <%= curl_request.architecture ? curl_request.architecture : "???" %>
         </td>
         <td>
           <%= curl_request.operating_system %>
