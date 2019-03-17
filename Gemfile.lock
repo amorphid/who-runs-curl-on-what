@@ -42,6 +42,10 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    airbrake (8.3.2)
+      airbrake-ruby (~> 4.1)
+    airbrake-ruby (4.2.1)
+      rbtree3 (~> 0.5)
     arel (9.0.0)
     bindex (0.5.0)
     bootsnap (1.4.1)
@@ -121,6 +125,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    rbtree3 (0.5.0)
     ruby_dep (1.5.0)
     sass (3.7.3)
       sass-listen (~> 4.0.0)
@@ -168,6 +173,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake (~> 8.3)
   bootsnap (>= 1.1.0)
   byebug
   coffee-rails (~> 4.2)
