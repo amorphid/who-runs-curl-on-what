@@ -33,7 +33,11 @@ class CurlRequestsController < ApplicationController
   end
 
   def validate_user_agent
-    unless request.user_agent.match?(/curl\/(\d+\.)*\d+/)
+    unless request.user_agent 
+      return head 400
+    end
+
+    unless request.user_agent && request.user_agent.match?(/curl\/(\d+\.)*\d+/)
       head 400
     end
   end
