@@ -4,6 +4,9 @@ class CurlRequestsController < ApplicationController
   before_action :validate_user_agent, only: [:create]
   before_action :validate_params, only: [:create]
 
+  INVALID_PARAMS_MESSAGE = "invalid params"
+  INVALID_USER_AGENT = "invalid user agent"
+
   def create
     @curl_request = CurlRequest.find_or_initialize_by(curl_request_params)
     @curl_request.increment_count
@@ -54,11 +57,11 @@ class CurlRequestsController < ApplicationController
 
   def validate_user_agent
     unless request.user_agent 
-      return head 400
+      return render plain: INVALID_USER_AGENT, status_code: 400
     end
 
     unless request.user_agent && request.user_agent.match?(/curl\/(\d+\.)*\d+/)
-      head 400
+      render plain: INVALID_USER_AGENT, status_code: 400
     end
   end
 end
